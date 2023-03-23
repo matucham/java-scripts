@@ -6,12 +6,10 @@ import java.util.Objects;
 class Patient implements Comparable<Patient> {
     private final String name;
     private int priority;
-    private long arrivalTime;
 
-    public Patient(String name, int priority, long arrivalTime) {
+    public Patient(String name, int priority) {
         this.name = name;
         this.priority = priority;
-        this.arrivalTime = arrivalTime;
     }
 
     public String getName() {
@@ -22,16 +20,12 @@ class Patient implements Comparable<Patient> {
         return priority;
     }
 
-    public long getArrivalTime() {
-        return arrivalTime;
-    }
 
     @Override
     public String toString() {
         return "Patient{" +
                 "name='" + name + '\'' +
                 ", priority=" + priority +
-                ", arrivalTime=" + arrivalTime +
                 '}';
     }
 
@@ -40,21 +34,17 @@ class Patient implements Comparable<Patient> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Patient patient = (Patient) o;
-        return priority == patient.priority && arrivalTime == patient.arrivalTime && name.equals(patient.name);
+        return priority == patient.priority && name.equals(patient.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, priority, arrivalTime);
+        return Objects.hash(name, priority);
     }
 
     @Override
     public int compareTo(Patient o) {
-        int priorityDiff = Integer.compare(priority, o.getPriority());
-        if (priorityDiff == 0) {
-            return Long.compare(arrivalTime, o.getArrivalTime());
-        }
-        return priorityDiff;
+        return Integer.compare(priority, o.getPriority());
     }
 
 }

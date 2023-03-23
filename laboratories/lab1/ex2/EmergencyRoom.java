@@ -8,7 +8,7 @@ class EmergencyRoom {
     public void addPatient(Patient patient) {
         int i = 0;
         for (Patient p : patients) {
-            if (patient.compareTo(p) > 0) {
+            if (patient.compareTo(p) >= 0) {
                 i++;
             } else {
                 break;
