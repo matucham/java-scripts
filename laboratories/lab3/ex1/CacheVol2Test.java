@@ -1,6 +1,5 @@
 package lab3.ex1;
 
-import lab3.ex1.CacheVol2;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,8 +8,8 @@ class CacheVol2Test {
 
     @Test
     void test1() {
-        CacheVol2<Integer, Integer> cache;
-        cache = new CacheVol2<>(8);
+        LRUCache<Integer, Integer> cache;
+        cache = new LRUCache<>(8);
         assertThrows(IllegalArgumentException.class, () -> {
             cache.get(99);
         });
@@ -18,8 +17,8 @@ class CacheVol2Test {
 
     @Test
     void test2() {
-        CacheVol2<Integer, Integer> cache;
-        cache = new CacheVol2<>(3);
+        LRUCache<Integer, Integer> cache;
+        cache = new LRUCache<>(3);
         cache.put(1, 1);
         cache.put(2, 4);
         cache.put(3, 9);
@@ -31,8 +30,8 @@ class CacheVol2Test {
 
     @Test
     void test3() {
-        CacheVol2<Integer, Integer> c;
-        c = new CacheVol2<>(4);
+        LRUCache<Integer, Integer> c;
+        c = new LRUCache<>(4);
         c.put(1, 1);
         c.put(2, 4);
         c.put(3, 9);

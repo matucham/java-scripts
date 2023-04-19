@@ -2,7 +2,7 @@ package lab3.ex1;
 
 import java.util.HashMap;
 
-public class CacheVol2<K, V>{
+public class LRUCache<K, V>{
     class Node<T, U> {
         Node<T, U> previous;
         Node<T, U> next;
@@ -23,7 +23,7 @@ public class CacheVol2<K, V>{
     private int maxSize;
     private int currentSize;
 
-    public CacheVol2(int maxSize){
+    public LRUCache(int maxSize){
         this.maxSize = maxSize;
         this.currentSize = 0;
         leastRecentlyUsed = new Node<K, V>(null, null, null, null);
@@ -35,28 +35,23 @@ public class CacheVol2<K, V>{
         if (Node == null){
             throw new IllegalArgumentException();
         }
-        // If MRU leave the list as it is
         else if (Node.key == mostRecentlyUsed.key){
             return mostRecentlyUsed.value;
         }
 
-        // Get the next and previous nodes
         Node<K, V> nextNode = Node.next;
         Node<K, V> previousNode = Node.previous;
 
-        // If at the left-most, we update LRU
         if (Node.key == leastRecentlyUsed.key){
             nextNode.previous = null;
             leastRecentlyUsed = nextNode;
         }
 
-        // If we are in the middle, we need to update the items before and after our item
         else if (Node.key != mostRecentlyUsed.key){
             previousNode.next = nextNode;
             nextNode.previous = previousNode;
         }
 
-        // Finally, move our item to the MRU
         Node.previous = mostRecentlyUsed;
         mostRecentlyUsed.next = Node;
         mostRecentlyUsed = Node;
@@ -71,20 +66,17 @@ public class CacheVol2<K, V>{
             return;
         }
 
-        // Put the new node at the right-most end of the linked-list
         Node<K, V> myNode = new Node<K, V>(mostRecentlyUsed, null, key, value);
         mostRecentlyUsed.next = myNode;
         cache.put(key, myNode);
         mostRecentlyUsed = myNode;
 
-        // Delete the left-most entry and update the LRU pointer
         if (currentSize == maxSize){
             cache.remove(leastRecentlyUsed.key);
             leastRecentlyUsed = leastRecentlyUsed.next;
             leastRecentlyUsed.previous = null;
         }
 
-        // Update cache size, for the first added entry update the LRU pointer
         else if (currentSize < maxSize){
             if (currentSize == 0){
                 leastRecentlyUsed = myNode;
