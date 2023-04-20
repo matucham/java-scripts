@@ -20,8 +20,6 @@ class GamePathFinderTest {
     @Test
     void testHasPath() {
         assertFalse(gamePathFinder.hasPath(1, 1, 43, 63)); // błędna ścieżka
-        assertFalse(gamePathFinder.hasPath(43, 63, 1, 1)); // błędny punkt startowy
-        assertFalse(gamePathFinder.hasPath(1, 1, 43, 63)); // błędny punkt końcowy
         assertTrue(gamePathFinder.hasPath(1, 1, 5, 5)); // istnieje
     }
 
@@ -37,6 +35,12 @@ class GamePathFinderTest {
     void testWrongStart() {
         assertTrue(gamePathFinder.wrongStart(43, 63)); // punkt początkowy na przeszkodzie
         assertFalse(gamePathFinder.wrongStart(1, 1)); // poprawny punkt początkowy
+    }
+
+    @Test
+    void testWrongEnd() {
+        assertFalse(gamePathFinder.wrongEnd(1, 1)); // punkt końcowy na przeszkodzie
+        assertTrue(gamePathFinder.wrongEnd(43, 63)); // poprawny punkt końcowy
     }
 
 }
