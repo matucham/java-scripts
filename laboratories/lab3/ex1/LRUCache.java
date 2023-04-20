@@ -30,59 +30,80 @@ public class LRUCache<K, V>{
         mostRecentlyUsed = leastRecentlyUsed;
         cache = new HashMap<K, Node<K, V>>();
     }
+
     public V get(K key){
-        Node<K, V> Node = cache.get(key);
-        if (Node == null){
+        Node<K, V> node = cache.get(key);
+        if (node == null){
             throw new IllegalArgumentException();
         }
-        else if (Node.key == mostRecentlyUsed.key){
+        else if (node.key == mostRecentlyUsed.key){
             return mostRecentlyUsed.value;
         }
 
-        Node<K, V> nextNode = Node.next;
-        Node<K, V> previousNode = Node.previous;
 
-        if (Node.key == leastRecentlyUsed.key){
+        Node<K, V> nextNode = node.next;
+        Node<K, V> previousNode = node.previous;
+
+        if (node.key == leastRecentlyUsed.key){
             nextNode.previous = null;
             leastRecentlyUsed = nextNode;
         }
 
-        else if (Node.key != mostRecentlyUsed.key){
+        else if (node.key != mostRecentlyUsed.key){
             previousNode.next = nextNode;
             nextNode.previous = previousNode;
         }
 
-        Node.previous = mostRecentlyUsed;
-        mostRecentlyUsed.next = Node;
-        mostRecentlyUsed = Node;
+        node.previous = mostRecentlyUsed;
+        mostRecentlyUsed.next = node;
+        mostRecentlyUsed = node;
         mostRecentlyUsed.next = null;
 
-        return Node.value;
-
+        return node.value;
     }
 
     public void put(K key, V value){
         if (cache.containsKey(key)){
-            return;
-        }
+            Node<K, V> node = cache.get(key);
+            node.value = value;
 
-        Node<K, V> myNode = new Node<K, V>(mostRecentlyUsed, null, key, value);
-        mostRecentlyUsed.next = myNode;
-        cache.put(key, myNode);
-        mostRecentlyUsed = myNode;
+            Node<K, V> nextNode = node.next;
+            Node<K, V> previousNode = node.previous;
 
-        if (currentSize == maxSize){
-            cache.remove(leastRecentlyUsed.key);
-            leastRecentlyUsed = leastRecentlyUsed.next;
-            leastRecentlyUsed.previous = null;
-        }
-
-        else if (currentSize < maxSize){
-            if (currentSize == 0){
-                leastRecentlyUsed = myNode;
+            if (node.key == leastRecentlyUsed.key && node.key != mostRecentlyUsed.key){
+                nextNode.previous = null;
+                leastRecentlyUsed = nextNode;
             }
-            currentSize++;
+
+            else if (node.key != mostRecentlyUsed.key){
+                previousNode.next = nextNode;
+                nextNode.previous = previousNode;
+
+                node.previous = mostRecentlyUsed;
+                mostRecentlyUsed.next = node;
+                mostRecentlyUsed = node;
+                mostRecentlyUsed.next = null;
+            }
+        }
+
+        else {
+            Node<K, V> myNode = new Node<K, V>(mostRecentlyUsed, null, key, value);
+            mostRecentlyUsed.next = myNode;
+            cache.put(key, myNode);
+            mostRecentlyUsed = myNode;
+
+            if (currentSize == maxSize){
+                cache.remove(leastRecentlyUsed.key);
+                leastRecentlyUsed = leastRecentlyUsed.next;
+                leastRecentlyUsed.previous = null;
+            }
+
+            else if (currentSize < maxSize){
+                if (currentSize == 0){
+                    leastRecentlyUsed = myNode;
+                }
+                currentSize++;
+            }
         }
     }
-
 }
