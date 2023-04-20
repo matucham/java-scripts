@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class LRUCacheTest {
 
     @Test
-    void test1() {
+    void testGet() {
         LRUCache<Integer, Integer> cache;
         cache = new LRUCache<>(8);
         assertThrows(IllegalArgumentException.class, () -> {
@@ -16,7 +16,7 @@ class LRUCacheTest {
     }
 
     @Test
-    void test2() {
+    void testPut() {
         LRUCache<Integer, Integer> cache;
         cache = new LRUCache<>(3);
         cache.put(1, 1);
@@ -29,7 +29,7 @@ class LRUCacheTest {
     }
 
     @Test
-    void test3() {
+    void testPutAndGet() {
         LRUCache<Integer, Integer> c;
         c = new LRUCache<>(4);
         c.put(1, 1);

@@ -79,8 +79,8 @@ public class GamePathFinder {
         GamePathFinder gamePathFinder = new GamePathFinder("C:\\Users\\Maciek\\IdeaProjects\\apro1_23l_matuszewski_maciej\\laboratories\\lab3\\ex2\\Map.bmp");
         int startX = 1;
         int startY = 1;
-        int endX = 43;
-        int endY = 63;
+        int endX = 6;
+        int endY = 6;
         if (gamePathFinder.hasPath(startX, startY, endX, endY)) {
             System.out.println("Ścieżka istnieje:");
             ArrayList<Point> path = gamePathFinder.getPath(startX, startY, endX, endY);
@@ -92,8 +92,8 @@ public class GamePathFinder {
         } else if (gamePathFinder.wrongEnd(endX, endY) == true) {
             System.out.println("Błędny punkt końcowy.");
         }
-        {
-            System.out.println("Nie ma ścieżki.");
+        else {
+            System.out.println("Ścieżka nie istnieje.");
         }
     }
 
