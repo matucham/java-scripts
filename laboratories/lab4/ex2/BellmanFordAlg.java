@@ -35,23 +35,18 @@ public class BellmanFordAlg {
     //struktury danych, by uwzględnić te informacje.
     private void relax(DigraphWeighted G, int v) {
         System.out.println("Relaksacja krawędzi " + G);
-        sleep();
         for (DirectEdge e : G.adj(v)) {
             int w = e.to();
             if(verbose)System.out.println("Porównanie odległości do " + w + " i " + v);
-            sleep();
             if (distTo[w] > distTo[v] + e.weight()) {
                 if (verbose) {
                     System.out.println("Odległość do " + w + " jest większa niż odległość do " + v);
-                    sleep();
                 }
                 if(verbose) System.out.println("Aktualizowanie odległości do " + w);
-                sleep();
                 distTo[w] = distTo[v] + e.weight();
                 edgeTo[w] = e;
                 if (!onQueue[w]) {
                     if (verbose) System.out.println("Dodawanie do kolejki " + w);
-                    sleep();
                     queue.enqueue(w);
                     onQueue[w] = true;
                 }
@@ -87,14 +82,4 @@ public class BellmanFordAlg {
             throw new IllegalArgumentException("Blad! wierzcholek nie nalezy do grafu.");
     }
 
-    private void sleep() {
-        if (verbose) {
-            try {
-                TimeUnit.MILLISECONDS.sleep(500);
-            } catch (InterruptedException ignored) {
-
-            }
-        }
-
-    }
 }
