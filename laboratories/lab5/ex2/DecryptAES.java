@@ -6,7 +6,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
 
-public class Trial {
+public class DecryptAES {
     private static String key = "Kjf456UjOP14Ywte";
     private static byte[] hexStringToByteArray(String hex) {
         ByteArrayOutputStream str = new ByteArrayOutputStream(hex.length() / 2);

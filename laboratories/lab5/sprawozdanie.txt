@@ -5,7 +5,9 @@ kod w klasie Main odpowiada za sprawdzenie poprawności hasła na podstawie argu
 argumentów jest różna od 1 lub długość poszczególnych części hasła nie jest równa 4, zostanie wyświetlony komunikat
 "Wrong password!". W przeciwnym przypadku sprawdzane jest, czy pierwsza część hasła jest równa zaszyfrowanemu łańcuchowi
 "CB42", a druga część jest równa aktualnemu roku. Jeśli oba warunki są spełnione, wyświetlany jest komunikat "Good
-guess". W przeciwnym razie wyświetlany jest komunikat "Wrong password!".
+guess". W przeciwnym razie wyświetlany jest komunikat "Wrong password!". UWAGA: Program nie weryfikuje, cos się dzieje
+po wprowadzeniu DC53_2023_(dowolny tekst), toteż jest możliwe wprowadzenie np. DC53_2023_Maciej i hasło wciąż będzie
+wykrywane jako dobre.
 Hasło to: DC53_2023
 
 Ex2
