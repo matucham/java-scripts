@@ -62,5 +62,12 @@ shutdown -h now
 Toteż wiemy skąd jest pobierany zip, jaką scieżkę obiera, pod jaką nazwą się zapisuje, na jakim systemie operacyjnym
 działa(weryfikuje, czy jest to Windows i jeśli jest to Windows to wykonuje shutdown /s, a jeśli Linux to wykonuje to
 shutdown -h now) i jakie operacje wykonuje. Zipbomba powoduje wymuszenie wyłączenia komputera.
+Co robi zipbomba zgodnie z opisem producenta:
+" non-recursive zip bomb that achieves a high compression ratio by overlapping files inside the zip container.
+"Non-recursive" means that it does not rely on a decompressor's recursively unpacking zip files nested within zip files:
+it expands fully after a single round of decompression. The output size increases quadratically in the input size,
+reaching a compression ratio of over 28 million (10 MB → 281 TB) at the limits of the zip format. Even greater
+expansion is possible using 64-bit extensions. The construction uses only the most common compression algorithm,
+DEFLATE, and is compatible with most zip parsers."
 
 
