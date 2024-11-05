@@ -1,4 +1,4 @@
-# Java programs created for a university subject: APRO2_23L_MATUSZEWSKI_MACIEJ
+# Java programs created for a university subject: Algorithms and Programming
 
 
 
